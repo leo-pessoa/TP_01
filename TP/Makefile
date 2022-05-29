@@ -30,10 +30,5 @@ $(OBJ_FOLDER)/Jogador.o: $(HDR_FILES) $(SRC_FOLDER)/Jogador.cpp
 $(OBJ_FOLDER)/Mao.o: $(HDR_FILES) $(SRC_FOLDER)/Mao.cpp
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Mao.o $(SRC_FOLDER)/Mao.cpp 
 
-$(OBJ_FOLDER)/Poker.o: $(HDR_FILES) $(SRC_FOLDER)/Poker.cpp
-	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Poker.o $(SRC_FOLDER)/Poker.cpp 
-
-
-
 clean:
 	rm $(TARGET) $(OBJ_FILES) 

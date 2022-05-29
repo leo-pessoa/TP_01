@@ -7,12 +7,13 @@ using std::ifstream;
 #include <cstdlib>
 
 using namespace std;
-int main(int argc, char *argv[], char *envp[])
+int main()
 {
-    int n_rodadas, dinheiro_inicial, n_jogadores, pingo, aposta;
-    char mao[4][3];
+    int n_rodadas, dinheiro_inicial;
+    int n_jogadores, pingo, aposta;
+    char mao[5][3];
     FILE * fp;
-    fp = fopen ("entrada.txt", "r+");
+    fp = fopen("../entrada.txt", "r+");
     
     fscanf(fp, "%d %d\n", &n_rodadas, &dinheiro_inicial);
     printf("Rodadas: %d\n", n_rodadas);
@@ -33,11 +34,11 @@ int main(int argc, char *argv[], char *envp[])
                 fscanf(fp, "%s ", mao[k]);
                 printf("Carta: %s\n", mao[k]);
             }
-            fscanf(fp, "%s\n", mao[5]);
-            printf("Carta: %s\n", mao[5]);
+            fscanf(fp, "%s\n", mao[4]);
+            printf("Carta: %s\n", mao[4]);
        }
     }
-
     fclose(fp); 
+    
     return 0;
 }

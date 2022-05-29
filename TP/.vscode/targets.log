@@ -1,0 +1,317 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sun May 29 17:57:53 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 1)
+INCLUDE_FOLDER = ./include/
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from 'Makefile', line 12)
+TARGET = $(BIN_FOLDER)/poker
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /home/leo/estrutura_de_dados/TP_01/TP
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"74ce6549a467d1dfaba55fb5394742c9.pt-br","_translationsConfigFile":"/home/leo/.vscode-server/data/clp/74ce6549a467d1dfaba55fb5394742c9.pt-br/tcf.json","_cacheRoot":"/home/leo/.vscode-server/data/clp/74ce6549a467d1dfaba55fb5394742c9.pt-br","_resolvedLanguagePackCoreLocation":"/home/leo/.vscode-server/data/clp/74ce6549a467d1dfaba55fb5394742c9.pt-br/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"/home/leo/.vscode-server/data/clp/74ce6549a467d1dfaba55fb5394742c9.pt-br/corrupted.info","_languagePackSupport":true}
+# environment
+_ = /home/leo/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/node
+# makefile (from 'Makefile', line 8)
+CFLAGS = -Wall -c -I$(INCLUDE_FOLDER)
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_CWD = /mnt/c/Users/leona/AppData/Local/Programs/Microsoft VS Code
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 14)
+OBJ_FILES = $(OBJ_FOLDER)/Carta.o $(OBJ_FOLDER)/Jogador.o $(OBJ_FOLDER)/Mao.o $(OBJ_FOLDER)/Main.o
+# environment
+PATH = /home/leo/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/home/leo/otp/bin:/home/leo/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/MinGW/bin:/mnt/c/Program Files/WireGuard/:/mnt/c/Program Files/nodejs/:/mnt/c/mingw/bin:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/dotnet/:/mnt/c/Users/leona/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/leona/AppData/Roaming/npm:/mnt/c/Users/leona/AppData/Local/Programs/mongosh/:/mnt/c/mingw/mingw32/bin:/mnt/c/Users/leona/.dotnet/tools:/mnt/c/Program Files/erl-24.3.3/bin:/snap/bin
+# makefile (from 'Makefile', line 13)
+HDR_FILES = $(INCLUDE_FOLDER)/Carta.h $(INCLUDE_FOLDER)/Jogador.h $(INCLUDE_FOLDER)/Mao.h
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-43a67a60-4cb7-479f-824b-214c894bfe69.sock
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# automatic
+%F = $(notdir $%)
+# environment
+NIX_SSL_CERT_FILE = /etc/ssl/certs/ca-certificates.crt
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/leo/estrutura_de_dados/TP_01/TP
+# default
+.LOADED := 
+# environment
+WSL_INTEROP = /run/WSL/2384_interop
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/leo
+# environment
+LOGNAME = leo
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# makefile (from 'Makefile', line 4)
+SRC_FOLDER = ./src/
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 0
+# environment
+NIX_PROFILES = /nix/var/nix/profiles/default /home/leo/.nix-profile
+# makefile (from 'Makefile', line 7)
+CC = g++
+# makefile (from 'Makefile', line 2)
+BIN_FOLDER = ./bin/
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = leo
+# makefile
+.DEFAULT_GOAL := all
+# environment
+NAME = LAPTOP-VIHC6PSO
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/leona/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# environment
+HOSTTYPE = x86_64
+# makefile (from 'Makefile', line 9)
+LIBS = -lm
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# makefile (from 'Makefile', line 3)
+OBJ_FOLDER = ./obj/
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+WSL_DISTRO_NAME = Ubuntu
+# variable set hash-table stats:
+# Load=76/1024=7%, Rehash=0, Collisions=4/130=3%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2064, inode 1225014): 8 files, no impossibilities.
+
+# 8 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+src//Jogador.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 16:56:49.91
+#  File has been updated.
+#  Successfully updated.
+
+all: bin//poker
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src//Mao.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 17:14:15.23
+#  File has been updated.
+#  Successfully updated.
+
+obj//Main.o: src//Main.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-29 17:57:02.74
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 22):
+	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Main.o $(SRC_FOLDER)/Main.cpp 
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 17:57:50.78
+#  File has been updated.
+#  Successfully updated.
+
+obj//Carta.o: include//Carta.h include//Jogador.h include//Mao.h src//Carta.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-29 17:57:01.34
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 25):
+	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Carta.o $(SRC_FOLDER)/Carta.cpp 
+
+obj//Jogador.o: include//Carta.h include//Jogador.h include//Mao.h src//Jogador.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-29 17:57:01.81
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 28):
+	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Jogador.o $(SRC_FOLDER)/Jogador.cpp 
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src//Main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 17:48:47
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+include//Carta.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 16:38:07.07
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 34):
+	rm $(TARGET) $(OBJ_FILES) 
+
+obj//Mao.o: include//Carta.h include//Jogador.h include//Mao.h src//Mao.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-29 17:57:02.28
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 31):
+	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Mao.o $(SRC_FOLDER)/Mao.cpp 
+
+# Not a target:
+include//Jogador.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 16:16:58.55
+#  File has been updated.
+#  Successfully updated.
+
+bin//poker: obj//Carta.o obj//Jogador.o obj//Mao.o obj//Main.o
+#  Implicit rule search has not been done.
+ 
+#  Last modified 2022-05-29 17:57:03.01
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 19):
+	$(CC) -o $(TARGET) $(LIBS) $(OBJ_FILES)
+
+# Not a target:
+src//Carta.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 16:56:52.81
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+include//Mao.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 17:13:34.16
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=17/1024=2%, Rehash=0, Collisions=0/51=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 26 / storage = 275 B / avg = 10 B
+# current buf: size = 8162 B / used = 275 B / count = 26 / avg = 10 B
+
+# strcache performance: lookups = 49 / hit rate = 46%
+# hash-table stats:
+# Load=26/8192=0%, Rehash=0, Collisions=1/49=2%
+# Finished Make data base on Sun May 29 17:57:53 2022
+
+ 

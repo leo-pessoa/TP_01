@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/leo/estrutura_de_dados/TP_01/TP'
+g++ -Wall -c -I./include/ -o ./obj//Carta.o ./src//Carta.cpp 
+g++ -Wall -c -I./include/ -o ./obj//Jogador.o ./src//Jogador.cpp 
+g++ -Wall -c -I./include/ -o ./obj//Mao.o ./src//Mao.cpp 
+g++ -Wall -c -I./include/ -o ./obj//Main.o ./src//Main.cpp 
+g++ -o ./bin//poker -lm ./obj//Carta.o ./obj//Jogador.o ./obj//Mao.o ./obj//Main.o
+make: Leaving directory '/home/leo/estrutura_de_dados/TP_01/TP'
+ 
