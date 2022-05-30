@@ -4,6 +4,7 @@
 class Carta
 {
 public:
+    Carta();
     Carta(int _numero, int _naipe);
     bool mesmoNumero(Carta c);
     bool mesmoNaipe(Carta c);

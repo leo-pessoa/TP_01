@@ -2,11 +2,11 @@
 #ifndef MAO
 #define MAO
 #include "Carta.h"
+#include "Jogador.h"
 
 class Mao
 {
 public:
-    Mao(int _numero, int _naipe);
     bool threeOfAKind();
     bool fourOfAKind();
     bool twoSame();
@@ -18,9 +18,7 @@ public:
     bool straightFlush();
     int maiorCarta();
     int tipoJogada();
-    
-private:
-    Carta hand[5];
+    Carta * hand;
 };
 
 #endif

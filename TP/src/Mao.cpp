@@ -4,6 +4,7 @@
 #include "Mao.h"
 using namespace std;
 
+
 bool Mao::threeOfAKind(){
 	for(int i=0; i<5; i++){
 		for(int j=0; j<5; j++){
@@ -146,23 +147,23 @@ int Mao::maiorCarta(){
 }
 
 int Mao::tipoJogada(){
-	if (royalFlush()==true)
+	if (royalFlush())
 		return 10;
-	if (straightFlush()==true)
+	if (straightFlush())
 		return 9;
-	if(fourOfAKind()==true)
+	if(fourOfAKind())
 		return 8;
-	if(fullHouse()==true)
+	if(fullHouse())
 		return 7;
-	if(flush()==true)
+	if(flush())
 		return 6;
-	if(straight()==true)
+	if(straight())
 		return 5;
-	if(threeOfAKind()==true)
+	if(threeOfAKind())
 		return 4;
-	if(doubleTwoSame()==true)
+	if(doubleTwoSame())
 		return 3;
-	if(twoSame()==true)
+	if(twoSame())
 		return 2;
 
 	return 1;
