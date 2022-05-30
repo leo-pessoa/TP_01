@@ -5,15 +5,16 @@ using namespace std;
 
 Jogador::Jogador()
 {
-
+	nome = "teste";
+	valor = 0;
 }
 
-
-Jogador::Jogador(std::string _nome, double _valor, Mao _mao)
+Jogador::Jogador(std::string _nome, double _valor)
 {
 	nome = _nome;
+	cout << "nomeEEEEEEEEE: " << nome << endl;
 	valor = _valor;
-	mao = _mao;
+	cout << "valoreeeeeeeeEE: " << valor << endl;
 }
 
 std::string Jogador::getNome()

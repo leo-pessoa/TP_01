@@ -5,8 +5,6 @@ using namespace std;
 
 Carta::Carta()
 {
-	numero = 0;
-	naipe = 0;
 }
 
 Carta::Carta(int _numero, int _naipe){

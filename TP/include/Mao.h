@@ -7,6 +7,7 @@
 class Mao
 {
 public:
+    Mao();
     bool threeOfAKind();
     bool fourOfAKind();
     bool twoSame();

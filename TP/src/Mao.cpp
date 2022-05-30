@@ -4,6 +4,10 @@
 #include "Mao.h"
 using namespace std;
 
+Mao::Mao(){
+
+}
+
 
 bool Mao::threeOfAKind(){
 	for(int i=0; i<5; i++){

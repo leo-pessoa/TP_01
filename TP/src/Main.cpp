@@ -6,37 +6,39 @@ using std::endl;
 using std::ifstream;
 #include <cstdlib>
 #include "Jogador.h"
+#include "Mao.h"
+#include "Carta.h"
+#include <sstream>
 
 using namespace std;
 
 int main()
 {
     int n_rodadas, dinheiro_inicial;
-    int n_jogadores, pingo, aposta, n_total_jogadores;
+    int n_jogadores, pingo, aposta, n_total_jogadores = 0;
     Jogador jogadores[5];
     FILE * fp;
     fp = fopen("../entrada.txt", "r+");
     
-    fscanf(fp, "%d %d\n", &n_rodadas, &dinheiro_inicial);
+    fscanf(fp, "%d %d", &n_rodadas, &dinheiro_inicial);
     printf("Rodadas: %d\n", n_rodadas);
     printf("Dinheiro inicial: %d\n", dinheiro_inicial);
-
 
     // cada rodada
     for (int i = 0; i < n_rodadas; i++) {
 
-
-        fscanf(fp, "%d %d\n", &n_jogadores, &pingo); 
+        fscanf(fp, "\n%d %d\n", &n_jogadores, &pingo);
         printf("Numero Jogadores: %d\n", n_jogadores );
         printf("Pingo: %d\n", pingo);
 
         int montante = 0;
 
         // cada aposta
+        char nome_tmp[256];
         for (int j = 0; j < n_jogadores; j++) {
-            char jogador_nome[256];
-            fscanf(fp, "%[^0-9]", jogador_nome);
-            printf("Jogador: %s\n", jogador_nome);
+            fscanf(fp, "%[^0-9]", nome_tmp);
+            std::string nome_jogador = nome_tmp;
+            printf("Jogador na leitura: %s\n", nome_tmp);
             fscanf(fp, "%d ", &aposta);
             printf("Aposta: %d\n", aposta);
             montante += aposta;
@@ -54,38 +56,40 @@ int main()
                 Carta carta(atoi(numeroCarta), naipeCarta);
                 cartas[i] = carta;
             }
-
             fscanf(fp, "%[0-9]+", numeroCarta);
             fscanf(fp, "%c\n", &naipeCarta);
             printf("Carta: %s %c\n", numeroCarta, naipeCarta);
+            Carta carta(atoi(numeroCarta), naipeCarta);
+            cartas[5] = carta;
 
-            Mao maoJogador;
-            maoJogador.hand = cartas;
-
+            Jogador jogador_encontrado;
             if (i == 0)
             {
                 n_total_jogadores = n_jogadores;
-                Jogador jog(jogador_nome, dinheiro_inicial, maoJogador);
-                jogadores[j]  = jog; 
+                Jogador jog(nome_jogador, dinheiro_inicial);
+                jogadores[j] = jog;
+                jogador_encontrado = jog;
+                cout << jogador_encontrado.getNome() << "JOGADOR ENCONTRADOOO";
             }
-
-
-
-            Jogador jogador_encontrado;
-
-            for (int k = 0; k < n_total_jogadores; k++)
-            {
-                if (jogadores[i].mesmoJogador(jogador_nome))
+            else {
+                for (int l = 0; l < n_total_jogadores; l++)
                 {
-                    jogador_encontrado = jogadores[i];
-                    break;
+                    if (jogadores[l].mesmoJogador(nome_jogador))
+                    {
+                        jogador_encontrado = jogadores[l];
+                        break;
+                    }
                 }
             }
 
             printf("Jogador encontrado: %s %f\n", jogador_encontrado.getNome().c_str(), jogador_encontrado.getValor());
 
-            jogador_encontrado.setValor(jogador_encontrado.getValor() - aposta);
-        
+
+            Mao maoJogador;
+            maoJogador.hand = cartas;
+
+
+            jogador_encontrado.setValor(jogador_encontrado.getValor() - aposta);        
        }
 
        // retirando pingo
@@ -96,9 +100,11 @@ int main()
        }
     }
 
-    for (int l = 0; l < n_total_jogadores; l++) 
+    cout << "CONTADOOOOR EI NAO TO MALUCO: " << n_total_jogadores << "\n";
+
+    for (int r = 0; r < n_total_jogadores; r++) 
     {
-        printf("Jogador no vetor %d: %s\n", l+1, jogadores[l].getNome().c_str());
+        printf("Jogador no vetor %d: %s\n", r, jogadores[r].getNome().c_str());
     }
 
     fclose(fp); 

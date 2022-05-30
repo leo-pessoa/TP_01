@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 29 21:00:07 2022
+# Make data base, printed on Mon May 30 00:18:18 2022
 
 # Variables
 
@@ -61,7 +61,7 @@ HDR_FILES = $(INCLUDE_FOLDER)/Carta.h $(INCLUDE_FOLDER)/Jogador.h $(INCLUDE_FOLD
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-76c3f966-29d3-4589-b439-6c8322395a21.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-72fdc327-f37c-4ef0-adcb-e5047cb51b5d.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -183,9 +183,10 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Not a target:
 src//Jogador.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 23:51:10.48
+#  File has been updated.
+#  Successfully updated.
 
 all: bin//poker
 #  Command line target.
@@ -198,14 +199,35 @@ all: bin//poker
 
 # Not a target:
 src//Mao.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-29 22:01:10.53
+#  File has been updated.
+#  Successfully updated.
 
 obj//Main.o: src//Main.cpp
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-05-29 23:51:47.37
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj//Main.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := src//Main.cpp
+# automatic
+# | := 
+# automatic
+# < := src//Main.cpp
+# automatic
+# ^ := src//Main.cpp
+# automatic
+# ? := src//Main.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/16=6%
 #  recipe to execute (from 'Makefile', line 22):
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Main.o $(SRC_FOLDER)/Main.cpp 
 
@@ -224,35 +246,17 @@ Makefile:
 
 obj//Carta.o: include//Carta.h include//Jogador.h include//Mao.h src//Carta.cpp
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  Last modified 2022-05-29 20:24:40.97
+#  Last modified 2022-05-29 23:51:46.49
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj//Carta.o
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := include//Carta.h include//Jogador.h include//Mao.h src//Carta.cpp
-# automatic
-# | := 
-# automatic
-# < := include//Carta.h
-# automatic
-# ^ := include//Carta.h include//Jogador.h include//Mao.h src//Carta.cpp
-# automatic
-# ? := include//Mao.h
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/16=6%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 25):
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Carta.o $(SRC_FOLDER)/Carta.cpp 
 
 obj//Jogador.o: include//Carta.h include//Jogador.h include//Mao.h src//Jogador.cpp
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2022-05-29 23:51:46.77
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 28):
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Jogador.o $(SRC_FOLDER)/Jogador.cpp 
 
@@ -264,20 +268,21 @@ obj//Jogador.o: include//Carta.h include//Jogador.h include//Mao.h src//Jogador.
 
 # Not a target:
 src//Main.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 00:17:55.29
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 include//Carta.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 16:38:07.07
+#  Last modified 2022-05-29 22:41:16.55
+ 
 #  File has been updated.
 #  Successfully updated.
 
 clean:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 34):
@@ -285,21 +290,22 @@ clean:
 
 obj//Mao.o: include//Carta.h include//Jogador.h include//Mao.h src//Mao.cpp
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2022-05-29 23:51:47.06
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 31):
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Mao.o $(SRC_FOLDER)/Mao.cpp 
 
 # Not a target:
 include//Jogador.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 19:51:55.04
+#  Last modified 2022-05-29 23:51:44.14
 #  File has been updated.
 #  Successfully updated.
 
 bin//poker: obj//Carta.o obj//Jogador.o obj//Mao.o obj//Main.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-29 20:24:42.5
+#  Last modified 2022-05-29 23:51:47.52
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -310,14 +316,14 @@ bin//poker: obj//Carta.o obj//Jogador.o obj//Mao.o obj//Main.o
 # Not a target:
 src//Carta.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 16:56:52.81
+#  Last modified 2022-05-29 22:47:17.24
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 include//Mao.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 20:46:09.17
+#  Last modified 2022-05-29 22:03:03.55
 #  File has been updated.
 #  Successfully updated.
 
@@ -335,6 +341,6 @@ include//Mao.h:
 # strcache performance: lookups = 51 / hit rate = 47%
 # hash-table stats:
 # Load=27/8192=0%, Rehash=0, Collisions=1/51=2%
-# Finished Make data base on Sun May 29 21:00:07 2022
+# Finished Make data base on Mon May 30 00:18:18 2022
 
  
