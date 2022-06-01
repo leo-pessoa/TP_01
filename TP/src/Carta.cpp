@@ -7,9 +7,10 @@ Carta::Carta()
 {
 }
 
-Carta::Carta(int _numero, int _naipe){
+Carta::Carta(int _numero, char _naipe){
 	numero = _numero;
 	naipe = _naipe;
+ printf("Carta na instancia men: %d %c\n", numero, naipe);
 }
 
 bool Carta::mesmoNumero(Carta c){
@@ -30,7 +31,7 @@ bool Carta::cartaEspecial(){
 	return false;
 }
 
-int Carta::getNaipe()
+char Carta::getNaipe()
 {
  return naipe;
 }

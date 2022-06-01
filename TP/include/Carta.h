@@ -5,16 +5,16 @@ class Carta
 {
 public:
     Carta();
-    Carta(int _numero, int _naipe);
+    Carta(int _numero, char _naipe);
     bool mesmoNumero(Carta c);
     bool mesmoNaipe(Carta c);
     int getNumero();
-    int getNaipe();
+    char getNaipe();
     bool cartaEspecial();
 
 private:
     char naipe;
-    char numero;
+    int numero;
 };
 
 #endif

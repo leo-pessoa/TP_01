@@ -16,6 +16,7 @@ public:
 private:
     std::string nome;
     double valor;
+    Mao mao;
 };
 
 #endif

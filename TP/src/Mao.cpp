@@ -8,6 +8,12 @@ Mao::Mao(){
 
 }
 
+Mao::Mao(Carta * _hand){
+	for (int i = 0; i < 5; i++){
+		hand[i] = _hand[i];
+		printf("Carta na instancia manual: %d %c\n", _hand[i].getNumero(), _hand[i].getNaipe());
+	}
+}
 
 bool Mao::threeOfAKind(){
 	for(int i=0; i<5; i++){
@@ -19,6 +25,12 @@ bool Mao::threeOfAKind(){
 		}
 	}
 	return false;
+}
+
+void Mao::setHand(Carta *_hand) {
+	for (int i = 0; i < 5; i++) {
+		hand[i] = _hand[i];
+	}
 }
 
 bool Mao::fourOfAKind(){

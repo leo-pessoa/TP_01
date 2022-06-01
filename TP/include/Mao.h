@@ -8,6 +8,7 @@ class Mao
 {
 public:
     Mao();
+    Mao(Carta *_hand);
     bool threeOfAKind();
     bool fourOfAKind();
     bool twoSame();
@@ -19,7 +20,8 @@ public:
     bool straightFlush();
     int maiorCarta();
     int tipoJogada();
-    Carta * hand;
+    void setHand(Carta * _hand);
+    Carta hand[5];
 };
 
 #endif
