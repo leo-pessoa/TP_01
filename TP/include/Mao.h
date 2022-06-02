@@ -11,8 +11,8 @@ public:
     Mao(Carta *_hand);
     bool threeOfAKind();
     bool fourOfAKind();
-    bool twoSame();
-    bool doubleTwoSame();
+    bool onePair();
+    bool twoPairs();
     bool flush();
     bool straight();
     bool fullHouse();
@@ -20,7 +20,6 @@ public:
     bool straightFlush();
     int maiorCarta();
     int tipoJogada();
-    void setHand(Carta * _hand);
     Carta hand[5];
 };
 

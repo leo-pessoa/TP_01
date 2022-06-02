@@ -9,17 +9,24 @@ Jogador::Jogador()
 	valor = 0;
 }
 
-Jogador::Jogador(std::string _nome, double _valor)
+Jogador::Jogador(std::string _nome, double _valor, Mao _mao)
 {
 	nome = _nome;
 	cout << "Nome criado: " << nome << endl;
 	valor = _valor;
-	Mao mao;
-	Carta carta(0, 'a');
+	mao = _mao;
 
-	for	(int i = 0; i < 5; i++)
-		mao.hand[i] = carta;
+	int n = sizeof(mao.hand)/sizeof(mao.hand[0]);
 
+		for (int i = 0; i < n - 1; i++)
+			for (int j = 0; j < n - i - 1; j++)
+				if (mao.hand[j].getNumero() > mao.hand[j + 1].getNumero())
+					swap(mao.hand[j], mao.hand[j + 1]);
+}
+
+Mao Jogador::getMao()
+{
+ return mao;
 }
 
 std::string Jogador::getNome()
@@ -46,15 +53,12 @@ void Jogador::setValor(int _valor)
 
 void Jogador::setMao(Mao _mao)
 {
- mao = _mao;
 
- for (int l = 0; l < 5; l++)
- {
-		printf("Carta na mao: %d %c\n", mao.hand[l].getNumero(), mao.hand[l].getNaipe());
- }
+ int n = sizeof(_mao.hand) / sizeof(_mao.hand[0]);
 
- for (int l = 0; l < 5; l++)
- {
-		printf("Carta na mao 2222: %d %c\n", _mao.hand[l].getNumero(), _mao.hand[l].getNaipe());
- }
+ for (int i = 0; i < n - 1; i++)
+		for (int j = 0; j < n - i - 1; j++)
+			if (_mao.hand[j].getNumero() > _mao.hand[j + 1].getNumero())
+				swap(_mao.hand[j], _mao.hand[j + 1]);
+	mao = _mao;
 }

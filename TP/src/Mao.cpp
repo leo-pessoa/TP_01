@@ -11,7 +11,6 @@ Mao::Mao(){
 Mao::Mao(Carta * _hand){
 	for (int i = 0; i < 5; i++){
 		hand[i] = _hand[i];
-		printf("Carta na instancia manual: %d %c\n", _hand[i].getNumero(), _hand[i].getNaipe());
 	}
 }
 
@@ -27,11 +26,6 @@ bool Mao::threeOfAKind(){
 	return false;
 }
 
-void Mao::setHand(Carta *_hand) {
-	for (int i = 0; i < 5; i++) {
-		hand[i] = _hand[i];
-	}
-}
 
 bool Mao::fourOfAKind(){
 	for(int i=0; i<5; i++){
@@ -47,7 +41,7 @@ bool Mao::fourOfAKind(){
 	return false;
 }
 
-bool Mao::twoSame (){
+bool Mao::onePair (){
 	for(int i=0; i<5; i++){
 		for(int j=0; j<5; j++)
 		 	if(hand[i].mesmoNumero(hand[j]) && i!=j)
@@ -57,7 +51,7 @@ bool Mao::twoSame (){
 }
 
 
-bool Mao::doubleTwoSame(){
+bool Mao::twoPairs(){
 	int counter1 = 0;
 	for(int i=0; i<5; i++){
 	 	for(int j=0; j<5; j++){
@@ -80,7 +74,7 @@ bool Mao::flush(){
 }
 
 bool Mao::straight(){
-	if(twoSame()==true)
+	if(onePair()==true)
 		return false;
 
 	int temp = 13;
@@ -116,7 +110,7 @@ bool Mao::straight(){
 }
 
 bool Mao::royalFlush(){
-	if(flush()==false||twoSame()==true)
+	if(flush()==false||onePair()==true)
 		return false;
 
 	int counter1 = 0;
@@ -144,7 +138,7 @@ bool Mao::straightFlush(){
 }
 
 bool Mao::fullHouse(){
-	if(threeOfAKind()==true && doubleTwoSame()==true)
+	if(threeOfAKind()==true && twoPairs()==true)
 		return true;
 	
 	else
@@ -177,9 +171,9 @@ int Mao::tipoJogada(){
 		return 5;
 	if(threeOfAKind())
 		return 4;
-	if(doubleTwoSame())
+	if(twoPairs())
 		return 3;
-	if(twoSame())
+	if(onePair())
 		return 2;
 
 	return 1;

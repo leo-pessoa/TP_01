@@ -13,11 +13,13 @@ using std::ifstream;
 
 using namespace std;
 
+
 int main()
 {
     int n_rodadas, dinheiro_inicial;
     int n_jogadores, pingo, aposta, n_total_jogadores = 0;
     Jogador jogadores[5];
+    Jogador jogadores_apostadores[5];
     std::string nome_jogador;
     FILE * fp;
     fp = fopen("../entrada.txt", "r+");
@@ -40,7 +42,7 @@ int main()
         char nome_tmp[256];
         for (int j = 0; j < n_jogadores; j++)
         {
-            fscanf(fp, "%[^0-9] ", nome_tmp);
+            fscanf(fp, "%[^0-9]", nome_tmp);
             nome_jogador = nome_tmp;
             printf("Jogador na leitura: %s\n", nome_tmp);
             fscanf(fp, "%d ", &aposta);
@@ -48,13 +50,30 @@ int main()
             montante += aposta;
             int jogEncontradoIndex = 0;
 
-            Jogador jogador_encontrado;
+            // leitura das cartas
+            //  cada carta
+            Carta cartas[5];
+            int numeroCarta;
+            char naipeCarta;
+            for (int k = 0; k < 5; k++)
+            {
+                fscanf(fp, "%d", &numeroCarta);
+                fscanf(fp, "%c ", &naipeCarta);
+                printf("Carta: %d %c\n", numeroCarta, naipeCarta);
+                Carta carta(numeroCarta, naipeCarta);
+                cartas[k] = carta;
+            }
+
+            Mao mao_jogador(cartas);
+
+
             if (i == 0)
             {
-                Jogador jog(nome_jogador, dinheiro_inicial);
+                
+                Jogador jog(nome_jogador, dinheiro_inicial, mao_jogador);
                 n_total_jogadores = n_jogadores;
                 jogadores[j] = jog;
-                jogador_encontrado = jog;
+                jogadores_apostadores[j] = jog;
             }
             else
             {
@@ -62,55 +81,14 @@ int main()
                 {
                     if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador))
                     {
-                        jogador_encontrado = jogadores[jogEncontradoIndex];
+                        jogadores[jogEncontradoIndex].setMao(mao_jogador);
+                        jogadores_apostadores[j] = jogadores[jogEncontradoIndex];
                         break;
                     }
                     jogEncontradoIndex++;
                 }
-
-                //  for (int u = 0; u < n_total_jogadores; u++)
-                // {
-                //     if (jogadores[u].mesmoJogador(nome_jogador))
-                //     {
-                //         jogador_encontrado = jogadores[u];
-                //         cout << "Jogador encontrado: " << jogadores[u].getNome() << endl;
-                //         break;
-                //     }
-                // }
             }
-
-            // cada carta
-            Carta cartas[5];
-            char numeroCarta[2];
-            char naipeCarta;
-            for (int k = 0; k < 4; k++)
-            {
-                fscanf(fp, "%[0-9]+", numeroCarta);
-                fscanf(fp, "%c ", &naipeCarta);
-                printf("Carta: %s %c\n", numeroCarta, naipeCarta);
-                Carta carta(atoi(numeroCarta), naipeCarta);
-                cartas[i] = carta;
-            }
-
-            fscanf(fp, "%[0-9]+", numeroCarta);
-            fscanf(fp, "%c\n", &naipeCarta);
-            printf("Carta: %s %c\n", numeroCarta, naipeCarta);
-            Carta carta(atoi(numeroCarta), naipeCarta);
-            cout << carta.getNumero() << endl;
-            printf("%c\n", carta.getNaipe());
-            cartas[5] = carta;
-
-            for (int k = 0; k < 5; k++)
-            {
-                cout << "CARTAS NA PORRA DO VETOR: " << cartas[k].getNumero() << " " << cartas[k].getNaipe() << endl;
-            }
-
-            Mao maoJogador(cartas);
-
-
-            jogadores[jogEncontradoIndex].setMao(maoJogador);
-
-            jogadores[jogEncontradoIndex].setValor(jogador_encontrado.getValor() - aposta);
+            jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
         }
 
        // retirando pingo
@@ -119,11 +97,22 @@ int main()
            jogadores[p].setValor(jogadores[p].getValor() - pingo);
            montante+=pingo;
        }
+
+       for (int count = 0; count < n_jogadores; count++)
+       {
+           int jogada = jogadores_apostadores[count].getMao().tipoJogada();
+           cout << "Jogadaça: " << jogada << endl;
+       }
     }
 
-    for (int r = 0; r < n_total_jogadores; r++) 
+
+    for (int count = 0; count < n_jogadores; count++)
     {
-        printf("Jogador no vetor %d: %s\n", r, jogadores[r].getNome().c_str());
+        printf("Jogador %d: %s\n", count+1, jogadores_apostadores[count].getNome().c_str());
+        for (int count2 = 0; count2 < 5; count2++)
+        {
+            printf("Carta %d: %d%c\n", count2+1, jogadores_apostadores[count].getMao().hand[count2].getNumero(), jogadores_apostadores[count].getMao().hand[count2].getNaipe());
+        }
     }
 
     fclose(fp); 
