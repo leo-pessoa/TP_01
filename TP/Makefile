@@ -10,8 +10,8 @@ LIBS = -lm
 
 # Arquivos
 TARGET = $(BIN_FOLDER)/poker
-HDR_FILES = $(INCLUDE_FOLDER)/Carta.h $(INCLUDE_FOLDER)/Jogador.h $(INCLUDE_FOLDER)/Mao.h
-OBJ_FILES = $(OBJ_FOLDER)/Carta.o $(OBJ_FOLDER)/Jogador.o $(OBJ_FOLDER)/Mao.o $(OBJ_FOLDER)/Main.o
+HDR_FILES = $(INCLUDE_FOLDER)/Carta.h $(INCLUDE_FOLDER)/Jogador.h $(INCLUDE_FOLDER)/Mao.h $(INCLUDE_FOLDER)/Rodada.h
+OBJ_FILES = $(OBJ_FOLDER)/Carta.o $(OBJ_FOLDER)/Jogador.o $(OBJ_FOLDER)/Mao.o $(OBJ_FOLDER)/Rodada.o $(OBJ_FOLDER)/Main.o
 
 all: $(TARGET)
 
@@ -29,6 +29,9 @@ $(OBJ_FOLDER)/Jogador.o: $(HDR_FILES) $(SRC_FOLDER)/Jogador.cpp
 
 $(OBJ_FOLDER)/Mao.o: $(HDR_FILES) $(SRC_FOLDER)/Mao.cpp
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Mao.o $(SRC_FOLDER)/Mao.cpp 
+
+$(OBJ_FOLDER)/Rodada.o: $(HDR_FILES) $(SRC_FOLDER)/Rodada.cpp
+	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/Rodada.o $(SRC_FOLDER)/Rodada.cpp 
 
 clean:
 	rm $(TARGET) $(OBJ_FILES) 

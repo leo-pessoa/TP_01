@@ -9,6 +9,7 @@ class Mao
 public:
     Mao();
     Mao(Carta *_hand);
+    bool comparaMaos(Mao m1, Mao m2);
     bool threeOfAKind();
     bool fourOfAKind();
     bool onePair();
@@ -16,7 +17,7 @@ public:
     bool flush();
     bool straight();
     bool fullHouse();
-    bool royalFlush();
+    bool royalStraightFlush();
     bool straightFlush();
     int maiorCarta();
     int tipoJogada();

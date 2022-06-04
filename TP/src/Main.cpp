@@ -9,10 +9,10 @@ using std::ifstream;
 #include "Jogador.h"
 #include "Mao.h"
 #include "Carta.h"
+#include "Rodada.h"
 #include <sstream>
 
 using namespace std;
-
 
 int main()
 {
@@ -55,6 +55,7 @@ int main()
             Carta cartas[5];
             int numeroCarta;
             char naipeCarta;
+
             for (int k = 0; k < 5; k++)
             {
                 fscanf(fp, "%d", &numeroCarta);
@@ -88,9 +89,11 @@ int main()
                     jogEncontradoIndex++;
                 }
             }
+
             jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
         }
 
+       Rodada rod(jogadores_apostadores);
        // retirando pingo
        for (int p = 0; p < n_total_jogadores; p++)
        {   
@@ -103,6 +106,10 @@ int main()
            int jogada = jogadores_apostadores[count].getMao().tipoJogada();
            cout << "Jogadaça: " << jogada << endl;
        }
+       
+       Jogador winner = rod.getWinner(n_jogadores);
+
+       cout << "Winner: " << winner.getNome() << winner.getMao().tipoJogada() << endl;
     }
 
 

@@ -14,6 +14,12 @@ Mao::Mao(Carta * _hand){
 	}
 }
 
+// bool Mao::comparaMaos(Mao m1, Mao m2){
+
+// }
+
+//OK
+
 bool Mao::threeOfAKind(){
 	for(int i=0; i<5; i++){
 		for(int j=0; j<5; j++){
@@ -27,8 +33,10 @@ bool Mao::threeOfAKind(){
 }
 
 
-bool Mao::fourOfAKind(){
-	for(int i=0; i<5; i++){
+// OK
+bool Mao::fourOfAKind()
+{
+ for(int i=0; i<5; i++){
 		for(int j=0; j<5; j++){
 		 	for(int l=0; l<5; l++){
 				for(int k=0; k<5;k++){
@@ -41,6 +49,8 @@ bool Mao::fourOfAKind(){
 	return false;
 }
 
+//OK
+
 bool Mao::onePair (){
 	for(int i=0; i<5; i++){
 		for(int j=0; j<5; j++)
@@ -50,6 +60,7 @@ bool Mao::onePair (){
 	return false;
 }
 
+//OK
 
 bool Mao::twoPairs(){
 	int counter1 = 0;
@@ -61,11 +72,14 @@ bool Mao::twoPairs(){
 	 	}
  	}
 
-	if(counter1==4||counter1==8)
+	if(counter1==4 || counter1==8)
 		return true;
 
 	return false;
 }
+
+
+//OK
 
 bool Mao::flush(){
 	if(hand[0].mesmoNaipe(hand[1]) && hand[0].mesmoNaipe(hand[2]) && hand[0].mesmoNaipe(hand[3]) && hand[0].mesmoNaipe(hand[4]))
@@ -73,63 +87,50 @@ bool Mao::flush(){
 	return false;
 }
 
+
+//OK
 bool Mao::straight(){
 	if(onePair()==true)
 		return false;
-
-	int temp = 13;
-	int temp2 = 13;
-	int l = 0;
-
-	int counter1=0;
-
-	 for(int i = 0; i<5; i++){
-		 for(int j = 0; j<13; j++){
-				if (j < temp)
-					temp = j;
-				if (j < temp2 && j > temp)
-					temp2 = j;	
-	 	}
-	 }
-	
-	if(temp==0&&temp2==9)
-	 temp=temp2;
-
-	for(int i = 0; i<5; i++){
-		for(int k = 0; k <5; k++){
-			l= temp+k;
-			if(l>12)
-				l= l-13;
-			if (hand[i].cartaEspecial())
-				counter1++;
+	bool is_straight = false;
+ for(int i = 1; i<5; i++){
+		for (int j = 0; j<5; j++){
+			if(hand[i].getNumero() == hand[0].getNumero()+i){
+				is_straight = true;
+			}
 		}
-	 }
-	if(counter1==5)
-		return true;
-	return false;
+	}
+	return is_straight;
 }
 
-bool Mao::royalFlush(){
-	if(flush()==false||onePair()==true)
+
+//OK
+bool Mao::royalStraightFlush(){
+	if(onePair())
 		return false;
 
-	int counter1 = 0;
+	int counter = 0;
 
-	for(int i = 0; i<5; i++){
-			for(int k = 0; k<5; k++){
-				if (hand[k].cartaEspecial())
-				{
-					counter1++;
-				}
+
+	if (hand[0].getNumero() == 1){
+		counter = 1;
+	}
+
+
+	for (int j=1; j<5; j++){
+			if(hand[j].getNumero() == 9+j){
+				counter++;
 			}
 	}
 
-	if(counter1==5)
+	if(counter==5 && flush()==true)
 		return true;
 
 	return false;
  }
 
+
+//OK
 bool Mao::straightFlush(){
 	if (straight() && flush())
 	   return true;
@@ -137,6 +138,7 @@ bool Mao::straightFlush(){
 	return false;
 }
 
+//OK
 bool Mao::fullHouse(){
 	if(threeOfAKind()==true && twoPairs()==true)
 		return true;
@@ -157,7 +159,7 @@ int Mao::maiorCarta(){
 }
 
 int Mao::tipoJogada(){
-	if (royalFlush())
+	if (royalStraightFlush())
 		return 10;
 	if (straightFlush())
 		return 9;
@@ -175,6 +177,5 @@ int Mao::tipoJogada(){
 		return 3;
 	if(onePair())
 		return 2;
-
 	return 1;
 }
