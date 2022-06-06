@@ -17,8 +17,6 @@ Jogador::Jogador(std::string _nome, double _valor, Mao _mao)
 	cout << "Nome criado: " << nome << endl;
 	valor = _valor;
 	mao = _mao;
-
-	orderMao(mao);
 }
 
 Mao Jogador::getMao()
@@ -31,7 +29,7 @@ std::string Jogador::getNome()
  return nome;
 }
 
-double Jogador::getValor()
+int Jogador::getValor()
 {
  return valor;
 }
@@ -50,20 +48,5 @@ void Jogador::setValor(int _valor)
 
 void Jogador::setMao(Mao _mao)
 {
-	orderMao(_mao);
 	mao = _mao;
 }
-
-void Jogador::orderMao(Mao _mao)
-{
-
- int n = sizeof(_mao.hand) / sizeof(_mao.hand[0]);
-
- for (int i = 0; i < n - 1; i++)
-		for (int j = 0; j < n - i - 1; j++)
-			if (_mao.hand[j].getNumero() > _mao.hand[j + 1].getNumero())
-				swap(_mao.hand[j], _mao.hand[j + 1]);
- mao = _mao;
-}
-
-

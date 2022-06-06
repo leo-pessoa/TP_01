@@ -39,3 +39,14 @@ int Carta::getNumero()
 {
  return numero;
 }
+
+bool operator>(Carta &c1,  Carta &c2)
+{
+ if (c1.getNumero() == 1 && c2.getNumero() != 1) {
+		return true;
+ }
+ else if (c2.getNumero() == 1 && c1.getNumero() != 1) {
+		return false;
+	}
+	return c1.getNumero()>c2.getNumero();
+}

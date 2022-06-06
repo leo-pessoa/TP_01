@@ -10,7 +10,13 @@ using std::ifstream;
 #include "Mao.h"
 #include "Carta.h"
 #include "Rodada.h"
+#include "msgassert.h"
 #include <sstream>
+#include <iomanip>
+#include <locale>
+
+#define SIZEOF(a) sizeof(a) / sizeof(*a)
+
 
 using namespace std;
 
@@ -23,8 +29,11 @@ int main()
     std::string nome_jogador;
     FILE * fp;
     fp = fopen("../entrada.txt", "r+");
+    erroAssert(fp != NULL, "Erro ao abrir arquivo de entrada");
 
-    fscanf(fp, "%d %d\n", &n_rodadas, &dinheiro_inicial); // scan 3 1000
+    fscanf(fp, "%d %d\n", &n_rodadas, &dinheiro_inicial);
+    erroAssert(n_rodadas > 0 && dinheiro_inicial > 0, "Erro ao ");
+    // scan 3 1000
     printf("Rodadas: %d\n", n_rodadas);
     printf("Dinheiro inicial: %d\n", dinheiro_inicial);
 
@@ -40,12 +49,15 @@ int main()
         // cada aposta
 
         char nome_tmp[256];
-        for (int j = 0; j < n_jogadores; j++)
-        {
+        for (int j = 0; j < n_jogadores; j++) {
             fscanf(fp, "%[^0-9]", nome_tmp);
             nome_jogador = nome_tmp;
+
+            erroAssert(nome_jogador != "" && nome_jogador != "", "Erro ao ler nome do jogador");
             printf("Jogador na leitura: %s\n", nome_tmp);
             fscanf(fp, "%d ", &aposta);
+
+
             printf("Aposta: %d\n", aposta);
             montante += aposta;
             int jogEncontradoIndex = 0;
@@ -56,8 +68,7 @@ int main()
             int numeroCarta;
             char naipeCarta;
 
-            for (int k = 0; k < 5; k++)
-            {
+            for (int k = 0; k < 5; k++) {
                 fscanf(fp, "%d", &numeroCarta);
                 fscanf(fp, "%c ", &naipeCarta);
                 printf("Carta: %d %c\n", numeroCarta, naipeCarta);
@@ -67,21 +78,14 @@ int main()
 
             Mao mao_jogador(cartas);
 
-
-            if (i == 0)
-            {
-                
+            if (i == 0) {
                 Jogador jog(nome_jogador, dinheiro_inicial, mao_jogador);
                 n_total_jogadores = n_jogadores;
                 jogadores[j] = jog;
                 jogadores_apostadores[j] = jog;
-            }
-            else
-            {
-                while (jogEncontradoIndex < n_total_jogadores)
-                {
-                    if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador))
-                    {
+            } else {
+                while (jogEncontradoIndex < n_total_jogadores) {
+                    if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
                         jogadores[jogEncontradoIndex].setMao(mao_jogador);
                         jogadores_apostadores[j] = jogadores[jogEncontradoIndex];
                         break;
@@ -90,36 +94,89 @@ int main()
                 }
             }
 
+            // retirando pingo
+            for (int p = 0; p < n_total_jogadores; p++) {
+                jogadores[p].setValor(jogadores[p].getValor() - pingo);
+                montante += pingo;
+            }
+
+            //retirando aposta
             jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
+
         }
 
-       Rodada rod(jogadores_apostadores);
-       // retirando pingo
-       for (int p = 0; p < n_total_jogadores; p++)
-       {   
-           jogadores[p].setValor(jogadores[p].getValor() - pingo);
-           montante+=pingo;
-       }
+        for (int i = 0; i < n_jogadores; i++)
+        {
+            printf("Jogador cartomante: %s\n", jogadores_apostadores[i].getNome().c_str());
+            for (int k = 0; k < 5; k++)
+            {
+                printf("Carta ordenada: %d %c\n", jogadores_apostadores[i].getMao().hand[k].getNumero(), jogadores_apostadores[i].getMao().hand[k].getNaipe());
+            }
+        }
 
-       for (int count = 0; count < n_jogadores; count++)
-       {
+        Rodada rod;
+        rod.setRodada(jogadores_apostadores, n_jogadores);
+        for (int count = 0; count < n_jogadores; count++) {
            int jogada = jogadores_apostadores[count].getMao().tipoJogada();
            cout << "Jogadaça: " << jogada << endl;
-       }
-       
-       Jogador winner = rod.getWinner(n_jogadores);
+        }
 
-       cout << "Winner: " << winner.getNome() << winner.getMao().tipoJogada() << endl;
+        std::string winners;
+        
+        
+        winners = rod.getWinners(n_jogadores);
+
+        int n = winners.length();
+
+        char winners_array[n + 1];
+
+        strcpy(winners_array, winners.c_str());
+
+        char *token = strtok(winners_array, "\n");
+
+        printf("Winners:\n");
+
+        int n_winners = 0;
+        while (token != NULL)
+        {
+            n_winners++;
+            int count = 0;
+            while (count < n_total_jogadores)
+            {
+                if (jogadores[count].mesmoJogador(nome_jogador))
+                {
+                    printf("%d\n", montante);
+                    printf("%s\n", jogadores[count].getNome().c_str());
+                    printf("%d\n", jogadores[count].getMao().tipoJogada());
+                    jogadores[count].setValor(jogadores[count].getValor()+montante);
+                }
+                count++;
+            }
+
+            token = strtok(NULL, "\n");
+        }
+
+        // for (int i = 0; i < n_winners; i++)
+        // {
+        //     string tmp_string(token[i]);
+        //     if (jogadores[i].mesmoJogador(token[i]))
+        //     {
+        //         std::string nome_aux =  token[i]
+        //         printf("%s\n", jogadores[count].getNome());
+        //         printf("%s\n", jogadores[count].getNome())
+        //     }
+        // }
     }
 
+    int i, j;
+    int n = 5;
+    for (i = 0; i < n - 1; i++)
+        for (j = 0; j < n - i - 1; j++)
+            if (jogadores[j].getValor() > jogadores[j + 1].getValor())
+                swap(jogadores[j], jogadores[j + 1]);
 
-    for (int count = 0; count < n_jogadores; count++)
-    {
-        printf("Jogador %d: %s\n", count+1, jogadores_apostadores[count].getNome().c_str());
-        for (int count2 = 0; count2 < 5; count2++)
-        {
-            printf("Carta %d: %d%c\n", count2+1, jogadores_apostadores[count].getMao().hand[count2].getNumero(), jogadores_apostadores[count].getMao().hand[count2].getNaipe());
-        }
+    for (int count = 0; count < n_total_jogadores; count++){
+        printf("%s %d\n", jogadores[count].getNome().c_str(), jogadores[count].getValor());
     }
 
     fclose(fp); 

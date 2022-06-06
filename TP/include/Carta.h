@@ -11,10 +11,9 @@ public:
     int getNumero();
     char getNaipe();
     bool cartaEspecial();
-
+    friend bool operator>(Carta &c1, Carta &c2);
 private:
     char naipe;
     int numero;
 };
-
 #endif

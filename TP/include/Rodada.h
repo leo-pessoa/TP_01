@@ -7,10 +7,9 @@ class Rodada
 {
 public:
  Rodada();
- Rodada(Jogador * jogadores);
- Jogador getWinner(int n);
- bool desempata(Jogador j1, Jogador j2);
-private:
+ void setRodada(Jogador *jogadores, int n_jodadores);
+ std::string getWinners(int n);
+ // bool desempata(Jogador j1, Jogador j2);
  Jogador jogadores[8];
 };
 
