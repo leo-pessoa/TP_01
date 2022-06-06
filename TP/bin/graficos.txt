@@ -1,0 +1,77 @@
+--------------------------------------------------------------------------------
+Command:            ./poker
+Massif arguments:   (none)
+ms_print arguments: massif.out.16220
+--------------------------------------------------------------------------------
+
+
+    KB
+79.98^                                                         ::::::::::::::#
+     |                                                         :             #
+     |                                    ::::::::::::::::::::::             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+     |                                   ::                    :             #
+   0 +----------------------------------------------------------------------->Mi
+     0                                                                   4.345
+
+Number of snapshots: 11
+ Detailed snapshots: [6 (peak)]
+
+--------------------------------------------------------------------------------
+  n        time(i)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
+--------------------------------------------------------------------------------
+  0              0                0                0             0            0
+  1      2,219,922           72,712           72,704             8            0
+  2      2,333,682           73,200           73,176            24            0
+  3      2,334,129           73,688           73,648            40            0
+  4      2,334,892           77,792           77,744            48            0
+  5      3,660,303           81,896           81,840            56            0
+  6      4,543,962           81,896           81,840            56            0
+99.93% (81,840B) (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+->88.78% (72,704B) 0x48F6A99: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+| ->88.78% (72,704B) 0x4011B89: call_init.part.0 (dl-init.c:72)
+|   ->88.78% (72,704B) 0x4011C90: call_init (dl-init.c:30)
+|     ->88.78% (72,704B) 0x4011C90: _dl_init (dl-init.c:119)
+|       ->88.78% (72,704B) 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+|         
+->10.00% (8,192B) 0x4ACED33: _IO_file_doallocate (filedoalloc.c:101)
+| ->10.00% (8,192B) 0x4ADEEFF: _IO_doallocbuf (genops.c:347)
+|   ->05.00% (4,096B) 0x4ADDCD3: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:486)
+|   | ->05.00% (4,096B) 0x4ADEFB5: _IO_default_uflow (genops.c:362)
+|   |   ->05.00% (4,096B) 0x4AB12AF: __vfscanf_internal (vfscanf-internal.c:627)
+|   |     ->05.00% (4,096B) 0x4AB026C: __isoc99_fscanf (isoc99_fscanf.c:30)
+|   |       ->05.00% (4,096B) 0x10C545: main (in /home/leo/estrutura_de_dados/TP_01/TP/bin/poker)
+|   |         
+|   ->05.00% (4,096B) 0x4ADDF5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+|     ->05.00% (4,096B) 0x4ADC6E4: _IO_new_file_xsputn (fileops.c:1244)
+|       ->05.00% (4,096B) 0x4ADC6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+|         ->05.00% (4,096B) 0x4AC47DC: __vfprintf_internal (vfprintf-internal.c:1687)
+|           ->05.00% (4,096B) 0x4AAEC99: fprintf (fprintf.c:32)
+|             ->05.00% (4,096B) 0x10CED9: main (in /home/leo/estrutura_de_dados/TP_01/TP/bin/poker)
+|               
+->01.15% (944B) 0x4ACF95D: __fopen_internal (iofopen.c:65)
+  ->01.15% (944B) 0x4ACF95D: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+    ->01.15% (944B) in 2 places, all below massif's threshold (1.00%)
+      
+--------------------------------------------------------------------------------
+  n        time(i)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
+--------------------------------------------------------------------------------
+  7      4,543,962           77,792           77,744            48            0
+  8      4,544,095           77,304           77,272            32            0
+  9      4,553,850            4,592            4,568            24            0
+ 10      4,555,712              488              472            16            0

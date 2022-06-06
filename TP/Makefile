@@ -5,11 +5,11 @@ SRC_FOLDER = ./src/
 
 # Opções do compilador
 CC = g++
-CFLAGS = -Wall -c -I$(INCLUDE_FOLDER)
+CFLAGS = -pg -Wall -c -I$(INCLUDE_FOLDER)
 LIBS = -lm
 
 # Arquivos
-TARGET = $(BIN_FOLDER)/poker
+TARGET = $(BIN_FOLDER)/tp1
 HDR_FILES = $(INCLUDE_FOLDER)/Carta.h $(INCLUDE_FOLDER)/Jogador.h $(INCLUDE_FOLDER)/Mao.h $(INCLUDE_FOLDER)/Rodada.h
 OBJ_FILES = $(OBJ_FOLDER)/Carta.o $(OBJ_FOLDER)/Jogador.o $(OBJ_FOLDER)/Mao.o $(OBJ_FOLDER)/Rodada.o $(OBJ_FOLDER)/Main.o
 
