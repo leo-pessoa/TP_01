@@ -14,7 +14,6 @@ Jogador::Jogador()
 Jogador::Jogador(std::string _nome, double _valor, Mao _mao)
 {
 	nome = _nome;
-	cout << "Nome criado: " << nome << endl;
 	valor = _valor;
 	mao = _mao;
 }

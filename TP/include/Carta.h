@@ -10,7 +10,6 @@ public:
     bool mesmoNaipe(Carta c);
     int getNumero();
     char getNaipe();
-    bool cartaEspecial();
     friend bool operator>(Carta &c1, Carta &c2);
 private:
     char naipe;

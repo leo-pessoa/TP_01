@@ -24,12 +24,6 @@ bool Carta::mesmoNaipe(Carta c){
 	return false;
 }
 
-bool Carta::cartaEspecial(){
- if (numero == 1 || numero > 9)
-		return true;
-	return false;
-}
-
 char Carta::getNaipe()
 {
  return naipe;

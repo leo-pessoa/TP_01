@@ -15,7 +15,60 @@ using std::ifstream;
 #include <iomanip>
 #include <locale>
 
-#define SIZEOF(a) sizeof(a) / sizeof(*a)
+#define RSF 100000
+#define SF 90000
+#define FK 80000
+#define FH 70000
+#define F 60000
+#define S 50000
+#define TK 40000
+#define TP 30000
+#define OP 20000
+#define HC 10000
+
+std::string getTipoJogada(int n) {
+
+    if (n >= RSF)
+    {
+        return "RSF";
+    }
+    if (n >= SF)
+    {
+        return "SF";
+    }
+    if (n >= FK)
+    {
+        return "FK";
+    }
+    if (n >= FH)
+    {
+        return "FH";
+    }
+    if (n >= F)
+    {
+        return "F";
+    }
+    if (n >= S)
+    {
+        return "S";
+    }
+    if (n >= TK)
+    {
+        return "TK";
+    }
+
+    if (n >= TP)
+    {
+        return "TP";
+    }
+
+    if (n >= OP)
+    {
+        return "OP";
+    }
+
+    return "HC";
+}
 
 
 using namespace std;
@@ -28,42 +81,43 @@ int main()
     Jogador jogadores_apostadores[5];
     std::string nome_jogador;
     FILE * fp;
+    int montante = 0;
     fp = fopen("../entrada.txt", "r+");
     erroAssert(fp != NULL, "Erro ao abrir arquivo de entrada");
 
+    FILE *fs;
+    fs = fopen("../saida.txt", "w");
+    erroAssert(fp != NULL, "Erro ao abrir arquivo de saida");
+
     fscanf(fp, "%d %d\n", &n_rodadas, &dinheiro_inicial);
     erroAssert(n_rodadas > 0 && dinheiro_inicial > 0, "Erro ao ");
-    // scan 3 1000
-    printf("Rodadas: %d\n", n_rodadas);
-    printf("Dinheiro inicial: %d\n", dinheiro_inicial);
 
-    // cada rodada
+    // leitura de cada rodada
     for (int i = 0; i < n_rodadas; i++) {
 
-        fscanf(fp, "%d %d\n", &n_jogadores, &pingo); // scan 5 50
-        printf("Numero Jogadores: %d\n", n_jogadores );
-        printf("Pingo: %d\n", pingo);
+        fscanf(fp, "%d %d\n", &n_jogadores, &pingo);
+        montante = 0;
 
-        int montante = 0;
 
-        // cada aposta
 
+        // teste de sanidade
+        for (int j = 0; j < n_jogadores; j++) {
+            
+        }
+
+        // leitura de cada aposta
         char nome_tmp[256];
         for (int j = 0; j < n_jogadores; j++) {
             fscanf(fp, "%[^0-9]", nome_tmp);
             nome_jogador = nome_tmp;
 
             erroAssert(nome_jogador != "" && nome_jogador != "", "Erro ao ler nome do jogador");
-            printf("Jogador na leitura: %s\n", nome_tmp);
             fscanf(fp, "%d ", &aposta);
 
-
-            printf("Aposta: %d\n", aposta);
             montante += aposta;
             int jogEncontradoIndex = 0;
 
-            // leitura das cartas
-            //  cada carta
+            // leitura de cada carta
             Carta cartas[5];
             int numeroCarta;
             char naipeCarta;
@@ -71,7 +125,6 @@ int main()
             for (int k = 0; k < 5; k++) {
                 fscanf(fp, "%d", &numeroCarta);
                 fscanf(fp, "%c ", &naipeCarta);
-                printf("Carta: %d %c\n", numeroCarta, naipeCarta);
                 Carta carta(numeroCarta, naipeCarta);
                 cartas[k] = carta;
             }
@@ -83,6 +136,7 @@ int main()
                 n_total_jogadores = n_jogadores;
                 jogadores[j] = jog;
                 jogadores_apostadores[j] = jog;
+                jogadores[j].setValor(jogadores[j].getValor() - aposta);
             } else {
                 while (jogEncontradoIndex < n_total_jogadores) {
                     if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
@@ -92,38 +146,25 @@ int main()
                     }
                     jogEncontradoIndex++;
                 }
+
+                // retirando aposta
+                if (jogadores[jogEncontradoIndex].getValor() >= aposta) {
+                    jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
+                }
             }
-
-            // retirando pingo
-            for (int p = 0; p < n_total_jogadores; p++) {
-                jogadores[p].setValor(jogadores[p].getValor() - pingo);
-                montante += pingo;
-            }
-
-            //retirando aposta
-            jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
-
         }
 
-        for (int i = 0; i < n_jogadores; i++)
-        {
-            printf("Jogador cartomante: %s\n", jogadores_apostadores[i].getNome().c_str());
-            for (int k = 0; k < 5; k++)
-            {
-                printf("Carta ordenada: %d %c\n", jogadores_apostadores[i].getMao().hand[k].getNumero(), jogadores_apostadores[i].getMao().hand[k].getNaipe());
-            }
+        // retirando pingo
+        for (int p = 0; p < n_total_jogadores; p++) {
+            jogadores[p].setValor(jogadores[p].getValor() - pingo);
+            montante += pingo;
         }
 
         Rodada rod;
         rod.setRodada(jogadores_apostadores, n_jogadores);
-        for (int count = 0; count < n_jogadores; count++) {
-           int jogada = jogadores_apostadores[count].getMao().tipoJogada();
-           cout << "Jogadaça: " << jogada << endl;
-        }
 
         std::string winners;
-        
-        
+
         winners = rod.getWinners(n_jogadores);
 
         int n = winners.length();
@@ -133,50 +174,48 @@ int main()
         strcpy(winners_array, winners.c_str());
 
         char *token = strtok(winners_array, "\n");
-
-        printf("Winners:\n");
+        char *token_aux = strtok(winners_array, "\n");
 
         int n_winners = 0;
-        while (token != NULL)
+
+        while (token_aux != NULL)
         {
             n_winners++;
+            token_aux = strtok(NULL, "\n");
+        }
+
+        //impressao da saida
+
+        while (token != NULL)
+        {
             int count = 0;
+            
             while (count < n_total_jogadores)
             {
-                if (jogadores[count].mesmoJogador(nome_jogador))
+                if (jogadores[count].mesmoJogador(token))
                 {
-                    printf("%d\n", montante);
-                    printf("%s\n", jogadores[count].getNome().c_str());
-                    printf("%d\n", jogadores[count].getMao().tipoJogada());
+                    fprintf(fs, "%d %d %s\n",n_winners,  montante, getTipoJogada(jogadores[count].getMao().tipoJogada()).c_str());
                     jogadores[count].setValor(jogadores[count].getValor()+montante);
+                    fprintf(fs, "%s\n", jogadores[count].getNome().c_str());
                 }
                 count++;
             }
 
             token = strtok(NULL, "\n");
         }
-
-        // for (int i = 0; i < n_winners; i++)
-        // {
-        //     string tmp_string(token[i]);
-        //     if (jogadores[i].mesmoJogador(token[i]))
-        //     {
-        //         std::string nome_aux =  token[i]
-        //         printf("%s\n", jogadores[count].getNome());
-        //         printf("%s\n", jogadores[count].getNome())
-        //     }
-        // }
     }
 
     int i, j;
     int n = 5;
     for (i = 0; i < n - 1; i++)
         for (j = 0; j < n - i - 1; j++)
-            if (jogadores[j].getValor() > jogadores[j + 1].getValor())
+            if (jogadores[j].getValor() < jogadores[j + 1].getValor())
                 swap(jogadores[j], jogadores[j + 1]);
 
+    fprintf(fs, "####\n");
+
     for (int count = 0; count < n_total_jogadores; count++){
-        printf("%s %d\n", jogadores[count].getNome().c_str(), jogadores[count].getValor());
+        fprintf(fs, "%s%d\n", jogadores[count].getNome().c_str(), jogadores[count].getValor());
     }
 
     fclose(fp); 
