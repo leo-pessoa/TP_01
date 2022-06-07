@@ -1,0 +1,113 @@
+desc: --time-unit=ms
+cmd: ./tp1
+time_unit: ms
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=515
+mem_heap_B=72704
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=532
+mem_heap_B=73176
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=534
+mem_heap_B=73648
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=536
+mem_heap_B=77744
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=554
+mem_heap_B=81840
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=560
+mem_heap_B=81840
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=peak
+n3: 81840 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x48F6A99: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+  n1: 72704 0x4011B89: call_init.part.0 (dl-init.c:72)
+   n1: 72704 0x4011C90: call_init (dl-init.c:30)
+    n1: 72704 0x4011C90: _dl_init (dl-init.c:119)
+     n0: 72704 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+ n1: 8192 0x4ACED33: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 8192 0x4ADEEFF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4ADDCD3: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:486)
+    n1: 4096 0x4ADEFB5: _IO_default_uflow (genops.c:362)
+     n1: 4096 0x4AB12AF: __vfscanf_internal (vfscanf-internal.c:627)
+      n1: 4096 0x4AB026C: __isoc99_fscanf (isoc99_fscanf.c:30)
+       n0: 4096 0x10C76F: main (in /home/leo/estrutura_de_dados/TP_01/TP/bin/tp1)
+   n1: 4096 0x4ADDF5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+    n1: 4096 0x4ADC6E4: _IO_new_file_xsputn (fileops.c:1244)
+     n1: 4096 0x4ADC6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+      n1: 4096 0x4AC47DC: __vfprintf_internal (vfprintf-internal.c:1687)
+       n1: 4096 0x4AAEC99: fprintf (fprintf.c:32)
+        n0: 4096 0x10D103: main (in /home/leo/estrutura_de_dados/TP_01/TP/bin/tp1)
+ n1: 944 0x4ACF95D: __fopen_internal (iofopen.c:65)
+  n1: 944 0x4ACF95D: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+   n0: 944 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=7
+#-----------
+time=560
+mem_heap_B=77744
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=561
+mem_heap_B=77272
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=566
+mem_heap_B=4568
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=567
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
