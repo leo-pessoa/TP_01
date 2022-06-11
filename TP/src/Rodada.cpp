@@ -31,7 +31,7 @@ void Rodada::setRodada(Jogador * _jogadores, int n_jogadores)
 std::string Rodada::getWinners(int n)
 {
 
-std::string vencedores = "";
+  std::string vencedores = "";
 
   int i, j;
   for (i = 0; i < n - 1; i++){
@@ -44,7 +44,7 @@ std::string vencedores = "";
 
   for (int i = n-1; i >= 0; i--) {
     if(jogadores[i].getMao().tipoJogada() == jogadores[n - 1].getMao().tipoJogada()) {
-        vencedores += jogadores[i].getNome() + "\n";
+        vencedores += jogadores[i].getNome() + " ";
     }
   }
   

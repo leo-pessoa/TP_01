@@ -14,6 +14,7 @@ using std::ifstream;
 #include <sstream>
 #include <iomanip>
 #include <locale>
+#include <math.h>
 
 #define RSF 100000
 #define SF 90000
@@ -70,6 +71,24 @@ std::string getTipoJogada(int n) {
     return "HC";
 }
 
+int getNWinners(std::string str, std::string * vencedores)
+{
+    // word variable to store word
+    std::string word;
+
+    // making a string stream
+    std::stringstream iss(str);
+    int count = 0;
+
+    // Read and print each word.
+    while (iss >> word) {
+        vencedores[count] = word;
+        count++;
+    }
+
+    return count;
+
+}
 
 using namespace std;
 
@@ -77,7 +96,9 @@ int main()
 {
     int n_rodadas, dinheiro_inicial;
     int n_jogadores, pingo, aposta, n_total_jogadores = 0;
-    Jogador jogadores[5];
+    Jogador jogadores[8];
+    int apostas[8]; 
+    bool sanidade = false;
     Jogador jogadores_apostadores[5];
     std::string nome_jogador;
     FILE * fp;
@@ -94,27 +115,22 @@ int main()
 
     // leitura de cada rodada
     for (int i = 0; i < n_rodadas; i++) {
+        sanidade = false;
 
         fscanf(fp, "%d %d\n", &n_jogadores, &pingo);
         montante = 0;
 
 
-
-        // teste de sanidade
-        for (int j = 0; j < n_jogadores; j++) {
-            
-        }
-
         // leitura de cada aposta
         char nome_tmp[256];
         for (int j = 0; j < n_jogadores; j++) {
-            fscanf(fp, "%[^0-9]", nome_tmp);
+            fscanf(fp, "%s", nome_tmp);
             nome_jogador = nome_tmp;
 
             erroAssert(nome_jogador != "" && nome_jogador != "", "Erro ao ler nome do jogador");
             fscanf(fp, "%d ", &aposta);
+            apostas[j] = aposta;
 
-            montante += aposta;
             int jogEncontradoIndex = 0;
 
             // leitura de cada carta
@@ -136,7 +152,14 @@ int main()
                 n_total_jogadores = n_jogadores;
                 jogadores[j] = jog;
                 jogadores_apostadores[j] = jog;
-                jogadores[j].setValor(jogadores[j].getValor() - aposta);
+
+                if (jogadores[j].getValor() >= aposta) {
+                    jogadores[j].setValor(jogadores[j].getValor() - aposta);
+                    montante += aposta;
+                } else {
+                    sanidade = true;
+                    break;
+                }
             } else {
                 while (jogEncontradoIndex < n_total_jogadores) {
                     if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
@@ -150,58 +173,100 @@ int main()
                 // retirando aposta
                 if (jogadores[jogEncontradoIndex].getValor() >= aposta) {
                     jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
+                    montante += aposta;
+                }
+                else {
+                    sanidade = true;
+                    break;
                 }
             }
         }
 
-        // retirando pingo
-        for (int p = 0; p < n_total_jogadores; p++) {
-            jogadores[p].setValor(jogadores[p].getValor() - pingo);
-            montante += pingo;
-        }
+        if (!sanidade) {
+            int sanidade_pingo = 0;
 
-        Rodada rod;
-        rod.setRodada(jogadores_apostadores, n_jogadores);
-
-        std::string winners;
-
-        winners = rod.getWinners(n_jogadores);
-
-        int n = winners.length();
-
-        char winners_array[n + 1];
-
-        strcpy(winners_array, winners.c_str());
-
-        char *token = strtok(winners_array, "\n");
-        char *token_aux = strtok(winners_array, "\n");
-
-        int n_winners = 0;
-
-        while (token_aux != NULL)
-        {
-            n_winners++;
-            token_aux = strtok(NULL, "\n");
-        }
-
-        //impressao da saida
-
-        while (token != NULL)
-        {
-            int count = 0;
-            
-            while (count < n_total_jogadores)
+            // chechando sanidade do pingo
+            for (int p = 0; p < n_total_jogadores; p++)
             {
-                if (jogadores[count].mesmoJogador(token))
-                {
-                    fprintf(fs, "%d %d %s\n",n_winners,  montante, getTipoJogada(jogadores[count].getMao().tipoJogada()).c_str());
-                    jogadores[count].setValor(jogadores[count].getValor()+montante);
-                    fprintf(fs, "%s\n", jogadores[count].getNome().c_str());
+                if (jogadores[p].getValor() < pingo) {
+                    sanidade_pingo++;
                 }
-                count++;
             }
 
-            token = strtok(NULL, "\n");
+            if (sanidade_pingo > 0 ) {
+                sanidade = true;
+
+                // devolvendo apostas
+                for (int p = 0; p < n_jogadores; p++)
+                {
+                    int count3 = 0;
+                    while (count3 < n_total_jogadores)
+                    {
+                        if (jogadores[count3].mesmoJogador(jogadores_apostadores[p].getNome()))
+                        {
+                            jogadores[count3].setValor(jogadores_apostadores[p].getValor() + apostas[p]);
+                            break;
+                        }
+                        count3++;
+                    }
+
+                }
+                
+            } else {
+                // retirando pingo
+                for (int p = 0; p < n_total_jogadores; p++) {
+                    jogadores[p].setValor(jogadores[p].getValor() - pingo);
+                    montante += pingo;
+                }
+
+            }
+
+        }
+
+        if (sanidade) {
+            fprintf(fs, "0 0 I\n");
+        } 
+        
+        else {
+
+            Rodada rod;
+            rod.setRodada(jogadores_apostadores, n_jogadores);
+
+            std::string winners;
+
+            winners = rod.getWinners(n_jogadores);
+
+            std::string vencedores[8];
+
+            int n_winners = getNWinners(winners, vencedores);
+
+            for (int i2 = 0; i2 < n_winners - 1; i2++)
+            {
+                for (int j2 = 0; j2 < n_winners - i2 - 1; j2++)
+                {
+                    if (vencedores[j2]> vencedores[j2 + 1])
+                    {
+                        swap(vencedores[j2], vencedores[j2 + 1]);
+                    }
+                }
+            }
+
+            for (int i = 0; i < n_winners; i++) {
+                int count = 0;
+                while (count < n_total_jogadores)
+                {
+                    if (jogadores[count].mesmoJogador(vencedores[i]))
+                    {   
+                        if (i == 0)
+                            fprintf(fs, "%d %d %s\n", n_winners, (int)(montante / n_winners), getTipoJogada(jogadores[count].getMao().tipoJogada()).c_str());
+                        jogadores[count].setValor(jogadores[count].getValor() +  floor(montante/n_winners));
+
+                        fprintf(fs, "%s ", jogadores[count].getNome().c_str());
+                    }
+                    count++;
+                }
+            }
+                fprintf(fs, "\n");
         }
     }
 
@@ -214,8 +279,8 @@ int main()
 
     fprintf(fs, "####\n");
 
-    for (int count = 0; count < n_total_jogadores; count++){
-        fprintf(fs, "%s%d\n", jogadores[count].getNome().c_str(), jogadores[count].getValor());
+    for (int count = 0; count < n_total_jogadores; count++) {
+        fprintf(fs, "%s %d\n", jogadores[count].getNome().c_str(), jogadores[count].getValor());
     }
 
     fclose(fp); 
