@@ -154,7 +154,6 @@ int main()
                     Jogador jog(nome_jogador, dinheiro_inicial, mao_jogador);
                     n_total_jogadores = n_jogadores;
                     jogadores[j] = jog;
-                    cout << "Encontrei jogador " << jogadores[j].getNome() << endl;
                     jogadores_apostadores[j] = jog;
 
                     if (jogadores[j].getValor() >= aposta) {
@@ -168,7 +167,6 @@ int main()
                 } else {
                     while (jogEncontradoIndex < n_total_jogadores) {
                         if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
-                            cout << "Encontrei jogador " << jogadores[jogEncontradoIndex].getNome() << endl;
                             jogadores[jogEncontradoIndex].setMao(mao_jogador);
                             jogadores_apostadores[j] = jogadores[jogEncontradoIndex];
                             break;
@@ -178,8 +176,6 @@ int main()
 
                     // retirando aposta
                     if (jogadores[jogEncontradoIndex].getValor() >= aposta) {
-
-                        cout << "Jogador " << jogadores[jogEncontradoIndex].getNome() << " apostou " << aposta << " reais" << endl;
                         jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
                         montante += aposta;
                     }
@@ -281,8 +277,6 @@ int main()
                 }
             }
         }
-
-        cout << "======================\n";
     }
 
     int i, j;
