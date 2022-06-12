@@ -115,7 +115,7 @@ int main()
 
     // leitura de cada rodada
     for (int i = 0; i < n_rodadas; i++) {
-        sanidade = false;
+
 
         fscanf(fp, "%d %d\n", &n_jogadores, &pingo);
         montante = 0;
@@ -147,39 +147,51 @@ int main()
 
             Mao mao_jogador(cartas);
 
-            if (i == 0) {
-                Jogador jog(nome_jogador, dinheiro_inicial, mao_jogador);
-                n_total_jogadores = n_jogadores;
-                jogadores[j] = jog;
-                jogadores_apostadores[j] = jog;
 
-                if (jogadores[j].getValor() >= aposta) {
-                    jogadores[j].setValor(jogadores[j].getValor() - aposta);
-                    montante += aposta;
-                } else {
-                    sanidade = true;
-                    break;
-                }
-            } else {
-                while (jogEncontradoIndex < n_total_jogadores) {
-                    if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
-                        jogadores[jogEncontradoIndex].setMao(mao_jogador);
-                        jogadores_apostadores[j] = jogadores[jogEncontradoIndex];
+            if (!sanidade) {
+
+                if (i == 0) {
+                    Jogador jog(nome_jogador, dinheiro_inicial, mao_jogador);
+                    n_total_jogadores = n_jogadores;
+                    jogadores[j] = jog;
+                    cout << "Encontrei jogador " << jogadores[j].getNome() << endl;
+                    jogadores_apostadores[j] = jog;
+
+                    if (jogadores[j].getValor() >= aposta) {
+                        
+                        jogadores[j].setValor(jogadores[j].getValor() - aposta);
+                        montante += aposta;
+                    } else {
+                        sanidade = true;
                         break;
                     }
-                    jogEncontradoIndex++;
+                } else {
+                    while (jogEncontradoIndex < n_total_jogadores) {
+                        if (jogadores[jogEncontradoIndex].mesmoJogador(nome_jogador)) {
+                            cout << "Encontrei jogador " << jogadores[jogEncontradoIndex].getNome() << endl;
+                            jogadores[jogEncontradoIndex].setMao(mao_jogador);
+                            jogadores_apostadores[j] = jogadores[jogEncontradoIndex];
+                            break;
+                        }
+                        jogEncontradoIndex++;
+                    }
+
+                    // retirando aposta
+                    if (jogadores[jogEncontradoIndex].getValor() >= aposta) {
+
+                        cout << "Jogador " << jogadores[jogEncontradoIndex].getNome() << " apostou " << aposta << " reais" << endl;
+                        jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
+                        montante += aposta;
+                    }
+                    else {
+                        sanidade = true;
+                        break;
+                    }
                 }
 
-                // retirando aposta
-                if (jogadores[jogEncontradoIndex].getValor() >= aposta) {
-                    jogadores[jogEncontradoIndex].setValor(jogadores[jogEncontradoIndex].getValor() - aposta);
-                    montante += aposta;
-                }
-                else {
-                    sanidade = true;
-                    break;
-                }
+
             }
+
         }
 
         if (!sanidade) {
@@ -204,18 +216,18 @@ int main()
                     {
                         if (jogadores[count3].mesmoJogador(jogadores_apostadores[p].getNome()))
                         {
-                            jogadores[count3].setValor(jogadores_apostadores[p].getValor() + apostas[p]);
+                            jogadores[count3].setValor(jogadores[count3].getValor() + apostas[p] + pingo);
                             break;
                         }
-                        count3++;
+                        count3++;   
                     }
 
                 }
-                
+
             } else {
                 // retirando pingo
-                for (int p = 0; p < n_total_jogadores; p++) {
-                    jogadores[p].setValor(jogadores[p].getValor() - pingo);
+                for (int pc = 0; pc < n_total_jogadores; pc++) {
+                    jogadores[pc].setValor(jogadores[pc].getValor() - pingo);
                     montante += pingo;
                 }
 
@@ -257,17 +269,20 @@ int main()
                 {
                     if (jogadores[count].mesmoJogador(vencedores[i]))
                     {   
-                        if (i == 0)
+                        if (i == 0) {
                             fprintf(fs, "%d %d %s\n", n_winners, (int)(montante / n_winners), getTipoJogada(jogadores[count].getMao().tipoJogada()).c_str());
-                        jogadores[count].setValor(jogadores[count].getValor() +  floor(montante/n_winners));
+                        }
 
-                        fprintf(fs, "%s ", jogadores[count].getNome().c_str());
+                        jogadores[count].setValor(jogadores[count].getValor() +  (int)(montante/n_winners));
+
+                        fprintf(fs, "%s\n", jogadores[count].getNome().c_str());
                     }
                     count++;
                 }
             }
-                fprintf(fs, "\n");
         }
+
+        cout << "======================\n";
     }
 
     int i, j;

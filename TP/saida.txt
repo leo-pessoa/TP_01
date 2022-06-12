@@ -1,21 +1,23 @@
 4 225 TP
-arzowkkyhid frxsjybldbef lrbbmqbh scdxrjm 
+Dudu
+Leo
+Pedro
+Torugo
 1 450 OP
-arzowkkyhid 
+Pedro
 1 650 OP
-arzowkkyhid 
+Pedro
 1 750 TP
-arzowkkyhid 
+Pedro
 1 500 OP
-arzowkkyhid 
+Pedro
 0 0 I
 0 0 I
 0 0 I
-1 600 OP
-scdxrjm 
+0 0 I
 0 0 I
 ####
-arzowkkyhid 2175
-scdxrjm 1075
-frxsjybldbef 325
-lrbbmqbh 25
+Pedro 2575
+Dudu 725
+Torugo 625
+Leo 75
